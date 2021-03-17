@@ -4,8 +4,9 @@ arch:
   - ppc64le
 jdk: openjdk11
 install:   
-   -  mvn $MAVEN_CLI_OPTS -DskipTests -Pyarn -Pmesos -Pkubernetes -Phive -Phive-thriftserver -Phadoop-cloud -Djava.version=11 install > spark_build.log
+   -  mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V > spark_build.log
    -  tail -300 spark_build.log
+   -  mvn test -B -D"license.skip=true"
 before_install:
    - |
       if [[ "$TRAVIS_CPU_ARCH" = "ppc64le" ]]; then
