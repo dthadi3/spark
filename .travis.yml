@@ -4,9 +4,9 @@ arch:
   - ppc64le
 jdk: openjdk11
 install:   
-   -  mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V > spark_build.log
-   -  tail -300 spark_build.log
-   -  mvn test -B -D"license.skip=true"
+   -  mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
+   -  mvn test -B -D"license.skip=true" > spark_test.log
+   -  tail -300 spark_test.log
 before_install:
    - |
       if [[ "$TRAVIS_CPU_ARCH" = "ppc64le" ]]; then
@@ -14,6 +14,6 @@ before_install:
       curl https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz|tar -xz --strip 1 -C /opt/maven
       export MAVEN_HOME=/opt/maven
       export PATH=${MAVEN_HOME}/bin:${PATH}
-      export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN"
-      export MAVEN_CLI_OPTS="--no-transfer-progress"
+#      export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN"
+#      export MAVEN_CLI_OPTS="--no-transfer-progress"
       fi
